@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <header>
+        <div class="links">
+            <a href="./index.html">Home</a>
+            <a href="./create-profile.html">Create Profile</a>
+            <a href="./profile.html">Profile</a>    
+        </div>
+    </header>
+    <div class="outer">     
+        <div class="profilecard">
+            <div class="centered">
+                <h2>Profile Information</h2>
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Instagram:</strong> {{ profile.instagram }}</p>
+                <p><strong>Twitter:</strong> {{ profile.twitter }}</p>
+                <p><strong>Email:</strong> {{ profile.email }}</p>
+                <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>                
+                <h2>QR Code</h2>                
+                <img src="{% url 'profile' user.username %}" alt="QR Code" width="200" height="200">
+                <p>Share this link with others: </p>
+                <a href="{% url 'profile' user.username %}">{% url 'profile' user.username %}</a>
+                <p>Download this QR Code: </p>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" name="download_qr">Download QR Code</button>
+                </form>
+            </div>
+        </div>        
+    </div>
+    <footer>
+        <p>Created by <a href="https://github.com/Arwindpianist">Arwin Kumar</a></p>
+    </footer>
+</body>
+</html>
