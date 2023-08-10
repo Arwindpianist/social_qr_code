@@ -39,4 +39,36 @@
         <p>Created by <a href="https://github.com/Arwindpianist">Arwin Kumar</a></p>
     </footer>
 </body>
+<script>
+    document.querySelector('form[name="download-qr-form"]').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const data = {
+            username: '{{ user.username }}',
+        };
+
+        const backendURL = 'https://your-backend.render.com/api/generate-qr-code/';
+
+        try {
+            const response = await fetch(backendURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                const qrCodeData = await response.json();
+                // Handle the QR code data, e.g., open a new window to download the QR code image
+                window.open(qrCodeData.qr_code_url, '_blank');
+            } else {
+                console.error('Error generating QR code');
+            }
+        } catch (error) {
+            console.error('An error occurred', error);
+        }
+    });
+</script>
+
 </html>

@@ -40,4 +40,38 @@
         <p>Created by <a href="https://github.com/Arwindpianist">Arwin Kumar</a></p>
     </footer>
 </body>
+<script>
+    document.querySelector('#qr-form').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const data = {
+            username: formData.get('username'),
+            instagram: formData.get('instagram'),
+            twitter: formData.get('twitter'),
+            email: formData.get('email'),
+            phone_number: formData.get('phone_number'),
+        };
+
+        const backendURL = 'https://your-backend.render.com/api/profiles/';
+
+        try {
+            const response = await fetch(backendURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                // Profile created successfully
+                window.location.href = './profile.html'; // Redirect to the profile page
+            } else {
+                console.error('Error creating profile');
+            }
+        } catch (error) {
+            console.error('An error occurred', error);
+        }
+    });
+</script>
 </html>
