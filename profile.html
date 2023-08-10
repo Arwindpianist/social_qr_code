@@ -47,7 +47,8 @@
             username: '{{ user.username }}',
         };
 
-        const backendURL = 'https://your-backend.render.com/api/generate-qr-code/';
+        const backendURL = 'https://social-qr-code-backend.onrender.com/api/generate-qr-code/';
+        const redirectURL = 'https://arwindpianist.github.io/social_qr_code/profile.html';
 
         try {
             const response = await fetch(backendURL, {
@@ -60,8 +61,8 @@
 
             if (response.ok) {
                 const qrCodeData = await response.json();
-                // Handle the QR code data, e.g., open a new window to download the QR code image
-                window.open(qrCodeData.qr_code_url, '_blank');
+                // Redirect to the profile page
+                window.location.href = redirectURL;
             } else {
                 console.error('Error generating QR code');
             }
@@ -70,5 +71,6 @@
         }
     });
 </script>
+
 
 </html>
