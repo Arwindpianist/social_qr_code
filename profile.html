@@ -28,7 +28,7 @@
                 <p>Share this link with others: </p>
                 <a href="{% url 'profile' user.username %}">{% url 'profile' user.username %}</a>
                 <p>Download this QR Code: </p>
-                <form method="post">
+                <form name="download-qr-form" method="post">
                     {% csrf_token %}
                     <button type="submit" name="download_qr">Download QR Code</button>
                 </form>
